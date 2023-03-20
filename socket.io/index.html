@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="text/html; />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.bootcss.com/socket.io/2.1.1/socket.io.js"></script>
+    </head>
+    <body>
+        <input type="text" placeholder="请输入你的内容" />
+        <button>send</button>
+        <div style="width: 300px; height: 300px; border: 2px solid deeppink; margin-top: 20px"></div>
+        <script>
+            const socket = io('http://localhost:8002')
+            // 获取一系列对象
+            const input = document.querySelector('input')
+            const button = document.querySelector('button')
+            const div = document.querySelector('div')
+
+            socket.on('send', (data) => {
+                console.log(data)
+            })
+        </script>
+    </body>
+</html>
