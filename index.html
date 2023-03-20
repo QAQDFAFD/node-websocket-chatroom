@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="text" placeholder="请输入你的内容" />
+        <button>send</button>
+        <div style="width: 300px; height: 300px; border: 2px solid deeppink; margin-top: 20px"></div>
+    </body>
+    <script>
+        // 获取一系列对象
+        const input = document.querySelector('input')
+        const button = document.querySelector('button')
+        const div = document.querySelector('div')
+        // 创建websocket对象
+        // 参数1：websocket服务地址
+        const socket = new WebSocket('ws://localhost:8001')
+        // 当连接成功的时候，就会触发
+        socket.addEventListener('open', function () {
+            console.log('success')
+            div.innerHTML = '连接成功！'
+        })
+        // 主动给websocket发消息
+        button.addEventListener('click', function () {
+            let value = input.value
+            socket.send(value)
+        })
+        // 通信发生错误的时候触发
+        socket.addEventListener('error', function (e) {
+            div.innerHTML = '连接失败！'
+        })
+        socket.addEventListener('message', function (e) {
+            console.log(e.data)
+            let data = JSON.parse(e.data)
+            let dv = document.createElement('div')
+            switch (data.type) {
+                case 0:
+                    dv.style.color = 'green'
+                    break
+                case 1:
+                    dv.style.color = 'red'
+                    break
+                case 0:
+                    dv.style.color = 'black'
+                    break
+            }
+            dv.innerHTML = data.msg + ' ' + data.time
+            div.append(dv)
+        })
+    </script>
+</html>
