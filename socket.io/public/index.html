@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="text/html; />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>chatroom</title>
+        <link rel="stylesheet" href="./index.css" />
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
         <style>
             * {
                 box-sizing: border-box;
@@ -49,8 +51,7 @@
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-            "
-        >
+            ">
             <div style="font-size: 2.5rem; font-weight: 500">用户登录</div>
             <div
                 class="user-name"
@@ -60,8 +61,7 @@
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
-                "
-            >
+                ">
                 <div>用户名</div>
                 <input type="text" style="margin-top: 0.625rem" />
             </div>
@@ -73,11 +73,10 @@
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
-                "
-            >
+                ">
                 <div>选择头像</div>
                 <div class="avatar-choose" style="width: 100%">
-                    <ul>
+                    <ul id="avatar-box">
                         <li>1</li>
                         <li>2</li>
                         <li>3</li>
@@ -100,18 +99,11 @@
                     justify-content: center;
                     align-items: center;
                     color: aliceblue;
-                "
-            >
+                ">
                 登录
             </div>
         </div>
         <script src="/socket.io/socket.io.js"></script>
-        <script>
-            const socket = io('http://localhost:8002')
-            socket.on('send', (data) => {
-                console.log(data)
-            })
-            socket.emit('login', { name: 'lijiajun' })
-        </script>
+        <script type="text/javascript" src="./index.js"></script>
     </body>
 </html>
