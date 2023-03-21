@@ -222,3 +222,67 @@ const boardcast = (p) => {
 
 Socket.IO 是一个库，可以在客户端和服务器之间实现 **低延迟**, **双向** 和 **基于事件的** 通信。它建立在 websocket 协议之上，并提供额外的保证，例如回退到 HTTP 长轮询或自动重新连接。
 
+## 代码实现
+
+> 以下是最基础的代码实现。
+>
+> 核心在于事件。
+
+index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="text/html; />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        哈哈
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io('http://localhost:8002')
+            socket.on('send', (data) => {
+                console.log(data)
+            })
+        </script>
+    </body>
+</html>
+```
+
+app.js
+
+```js
+const express = require('express')
+const { createServer } = require('http')
+const { Server } = require('socket.io')
+const app = express()
+const PORT = 8002
+const httpServer = createServer(app)
+const io = new Server(httpServer, {})
+const operation = {
+    IN: 0,
+    LEAVE: 1,
+    ONLINE: 2,
+}
+
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html')
+})
+
+io.on('connection', (socket) => {
+    console.log('连接成功')
+    socket.emit('send', { type: operation.IN, msg: '有人进入了聊天室', time: new Date().toLocaleDateString() })
+})
+
+httpServer.listen(PORT, () => {
+    console.log(`您的服务正在${PORT}端口运行`)
+})
+```
+
+# 聊天室项目
+
+## 登录功能
+
