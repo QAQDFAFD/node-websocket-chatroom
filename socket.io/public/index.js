@@ -17,9 +17,18 @@ $('#login-btn').on('click', function () {
         username: username,
         avatar: avatar,
     })
+    // 广播
     socket.on('hello', (data) => {
-        console.log(data)
         $('.chat-content').append(`<div>${data}</div>`)
+    })
+    // 用户列表
+    socket.on('userList', (data) => {
+        $('.user-num').append(`<span>(${data.length})</span>`)
+        // 循环渲染
+        for (let i = 0; i < data.length; i++) {
+            let temp = `<li>${data[i].username}</li>`
+            $('.user-list').append(temp)
+        }
     })
     // 登录页面渐渐淡出
     $('.model').fadeOut()
