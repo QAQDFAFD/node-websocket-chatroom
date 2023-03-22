@@ -18,6 +18,8 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html')
 })
 
+// 用户列表
+let userList = []
 io.on('connection', (socket) => {
     console.log('连接成功')
     socket.emit('send', {
@@ -27,7 +29,14 @@ io.on('connection', (socket) => {
     })
     // 登录事件
     socket.on('login', (data) => {
-        console.log(data)
+        //包含用户的用户名和头像
+        // 检查用户是否已经登陆
+        let user = userList.find((item) => item.username === data.username)
+        if (user) console.log('用户已经登录')
+        else {
+            userList.push(data)
+            console.log('用户登录成功')
+        }
     })
 })
 
