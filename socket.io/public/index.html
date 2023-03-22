@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="text/html; />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name=" viewport"
+            content="width=device-width, initial-scale=1.0" />
         <title>chatroom</title>
         <link rel="stylesheet" href="./index.css" />
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
@@ -14,6 +16,7 @@
                 padding: 0;
                 outline: none;
             }
+
             ul {
                 width: 14.375rem;
                 height: 6.875rem;
@@ -22,6 +25,7 @@
                 justify-content: center;
                 align-items: center;
             }
+
             ul li {
                 width: 3.125rem;
                 height: 3.125rem;
@@ -32,8 +36,13 @@
             li:nth-child(4n) {
                 margin-right: 0;
             }
+
+            input[type='file'] {
+                color: transparent;
+            }
         </style>
     </head>
+
     <body>
         <!-- 写一个基础的前端样式 -->
         <div
@@ -162,15 +171,58 @@
                         </div>
                     </div>
                     <div class="user-list-box">
-                        <div class="user-num">用户列表</div>
+                        <div>用户列表<span class="user-num"></span></div>
                         <div class="user-list"></div>
                     </div>
                 </div>
-                <div class="right" style="width: 25rem; height: 100%">
+                <div
+                    class="right"
+                    style="
+                        width: 25rem;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                    ">
                     <!-- 聊天的内容 -->
                     <div
                         class="chat-content"
-                        style="width: 100%; height: 100%"></div>
+                        style="
+                            width: 100%;
+                            height: 80%;
+                            border-bottom: 0.3125rem solid deeppink;
+                            overflow-y: scroll;
+                        "></div>
+                    <div
+                        id="input-content"
+                        style="position: relative; width: 100%; height: 20%">
+                        <textarea
+                            id="input-area"
+                            cols="40"
+                            rows="4"
+                            style="resize: none"></textarea>
+                        <input
+                            name="file"
+                            id="input-file"
+                            type="file"
+                            style="
+                                width: 10rem;
+                                height: 2.5rem;
+                                position: absolute;
+                                bottom: 0.8rem;
+                                right: 8rem;
+                            " />
+                        <button
+                            id="btn-send"
+                            style="
+                                width: 4rem;
+                                height: 2.5rem;
+                                position: absolute;
+                                bottom: 0.8rem;
+                                right: 0.8rem;
+                            ">
+                            发送
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
