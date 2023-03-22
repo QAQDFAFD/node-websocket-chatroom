@@ -36,6 +36,8 @@ io.on('connection', (socket) => {
         else {
             userList.push(data)
             console.log('用户登录成功')
+            // 告诉所有的用户，有人加入了聊天室
+            socket.broadcast.emit('hello', `${data.username}加入了聊天室`)
         }
     })
 })

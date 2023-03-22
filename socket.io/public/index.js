@@ -3,7 +3,6 @@ socket.on('send', (data) => {
     console.log(data)
 })
 $('#avatar-box li').on('click', function () {
-    console.log('执行')
     $(this).addClass('now').siblings().removeClass('now')
 })
 $('#login-btn').on('click', function () {
@@ -13,11 +12,14 @@ $('#login-btn').on('click', function () {
         return
     }
     let avatar = $('#avatar-box li.now').text()
-    console.log(`您选择了头像${avatar}`)
     // 登录
     socket.emit('login', {
         username: username,
         avatar: avatar,
+    })
+    socket.on('hello', (data) => {
+        console.log(data)
+        $('.chat-content').append(`<div>${data}</div>`)
     })
     // 登录页面渐渐淡出
     $('.model').fadeOut()
