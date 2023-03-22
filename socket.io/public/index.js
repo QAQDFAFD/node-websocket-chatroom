@@ -19,4 +19,10 @@ $('#login-btn').on('click', function () {
         username: username,
         avatar: avatar,
     })
+    // 登录页面渐渐淡出
+    $('.model').fadeOut()
+    $('.chatroom').fadeIn()
+    // 展示数据
+    $('.userInfo-avatar').text(avatar)
+    $('.userInfo-username').text(username)
 })
